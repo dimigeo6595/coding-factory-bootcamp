@@ -99,7 +99,7 @@ public class Account {
         try {
             if (amount < 0) throw new Exception("The amount should be positive");
             if (amount > balance) throw new Exception("Insufficient balance.");
-            if (!ssn.equals(this.ssn)) throw new Exception("The SSN does not match.");
+            if (!isSsnValid(ssn)) throw new Exception("The SSN does not match.");
             balance -= amount;
         }catch (Exception e){
             System.err.println("Withdraw failed:" + "\n" + e.getMessage());
@@ -117,5 +117,9 @@ public class Account {
     public String accountToString(){
         return "Account ID: " + id + " IBAN: " + " Firstname: " + firstname +
                 " Lastname: " + lastname + " SSN: " + ssn + " Balance: ";
+    }
+
+    private boolean isSsnValid(String ssn){
+        return ssn.equals(this.ssn);
     }
 }

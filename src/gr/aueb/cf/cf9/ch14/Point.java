@@ -31,4 +31,8 @@ public class Point {
         x = 0;
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ")";
+    }
 }

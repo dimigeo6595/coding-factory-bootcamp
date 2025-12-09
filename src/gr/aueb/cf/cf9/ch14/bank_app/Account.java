@@ -1,5 +1,7 @@
 package gr.aueb.cf.cf9.ch14.bank_app;
 
+import java.time.LocalDateTime;
+
 public class Account {
     private long id;
     private String iban;
@@ -74,14 +76,14 @@ public class Account {
     /**
      * Deposit the specified amount of money into the account.
      * @param amount the amount to deposit
-     * @throws Exception id the amount is negative
+     * @throws {@link NegativeAmountException} if the amount is negative
      */
-    public void deposit (double amount) throws Exception {
+    public void deposit (double amount) throws NegativeAmountException {
         try {
-            if (amount < 0) throw new Exception("The amount should be positive");
+            if (amount < 0) throw new NegativeAmountException("The amount" + amount + "should be positive");
             balance += amount;
             // log
-        } catch (Exception e) {
+        } catch (NegativeAmountException e) {
             System.err.println("Negative amount= " + amount + "is not allowed." + "\n" + e.getMessage());
             throw e;
         }
@@ -91,16 +93,16 @@ public class Account {
      * Withdraws the specified amount of money.
      * @param amount The amount to be withdrawn.
      * @param ssn The SSN of the account holder.
-     * @throws Exception If the amount is negative, the balance insufficient or the SSN does not match.
+     * @throws {@link InsufficientBalanceException}, {@link NegativeAmountException}, {@link SsnNotValidException} Exception If the amount is negative, the balance insufficient or the SSN does not match.
      */
-    public void withdraw(double amount, String ssn) throws Exception{
+    public void withdraw(double amount, String ssn) throws InsufficientBalanceException, NegativeAmountException, SsnNotValidException{
         try {
-            if (amount < 0) throw new Exception("The amount should be positive");
-            if (amount > balance) throw new Exception("Insufficient balance.");
-            if (!isSsnValid(ssn)) throw new Exception("The SSN does not match.");
+            if (amount < 0) throw new NegativeAmountException("The amount: " + amount + "should be positive");
+            if (amount > balance) throw new InsufficientBalanceException("Insufficient balance.");
+            if (!isSsnValid(ssn)) throw new SsnNotValidException("The SSN does not match.");
             balance -= amount;
-        }catch (Exception e){
-            System.err.println("Withdraw failed:" + "\n" + e.getMessage());
+        }catch (NegativeAmountException | InsufficientBalanceException | SsnNotValidException e){
+            System.err.println(LocalDateTime.now() + "\n" + e.getMessage());
         }
     }
 

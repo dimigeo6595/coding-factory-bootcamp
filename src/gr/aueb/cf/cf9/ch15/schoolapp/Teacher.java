@@ -12,7 +12,7 @@ public class Teacher {
 
     }
 
-    public Teacher(String firstname, long id, String lastname) {
+    public Teacher(long id, String firstname, String lastname) {
         this.firstname = firstname;
         this.id = id;
         this.lastname = lastname;

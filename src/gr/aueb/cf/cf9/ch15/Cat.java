@@ -1,6 +1,6 @@
 package gr.aueb.cf.cf9.ch15;
 
-public class Cat implements ISpeakble{
+public class Cat implements ISpeakable {
     private String name;
 
     public Cat(){

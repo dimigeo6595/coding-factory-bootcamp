@@ -18,4 +18,17 @@ public class GenericMethods {
         }
     }
 
+    public static void print(GenericNode<?> node){
+        System.out.println(node.getValue());
+    }
+
+    public static void printNumber(GenericNode<? extends Number> node){
+        System.out.println(node.getValue());
+    }
+
+    public static void printNumber2(GenericNode<? super Integer>  node){
+        System.out.println(node.getValue());
+    }
+
+
 }

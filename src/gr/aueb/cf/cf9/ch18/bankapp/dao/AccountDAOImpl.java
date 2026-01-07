@@ -11,24 +11,17 @@ public class AccountDAOImpl implements IAccountDAO {
     private final List<Account> accounts = new ArrayList<>();
 
     @Override
-    public Optional<Account> findByIban(String iban) {
-        return accounts.stream()
-                .filter(account -> account.getIban().equals(iban))
-                .findFirst();
-    }
-
-    @Override
     public Account saveOrUpdate(Account account) {
-        int index = accounts.indexOf(account); // equals
+        int index = accounts.indexOf(account);  // override equals
 
-        if (index == -1){           // if not exists
-            accounts.add(account);  // then insert
-            return (account);
+        if (index == -1) {                      // Αν δεν υπάρχει στη λίστα
+            accounts.add(account);              // τότε κάνε insert
+            return account;
         }
 
-        accounts.set(index, account);   // update
+        // Αν υπάρχει ήδη το Account
+        accounts.set(index, account);           // τότε κάνε update
         return accounts.get(index);
-
     }
 
     @Override
@@ -37,8 +30,15 @@ public class AccountDAOImpl implements IAccountDAO {
     }
 
     @Override
+    public Optional<Account> findByIban(String iban) {
+        return accounts.stream()
+                .filter(account -> account.getIban().equals(iban))
+                .findFirst();
+    }
+
+    @Override
     public List<Account> getAllAccounts() {
-        // return new ArrayList<>(accounts);
+        //return new ArrayList<>(accounts);
         return Collections.unmodifiableList(accounts);
         // return List.copyOf(accounts);
     }
@@ -47,6 +47,10 @@ public class AccountDAOImpl implements IAccountDAO {
     public boolean isAccountExists(String iban) {
         return accounts.stream()
                 .anyMatch(account -> account.getIban().equals(iban));
+    }
 
+
+    public long count() {
+        return accounts.size();
     }
 }

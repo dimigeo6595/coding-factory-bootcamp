@@ -61,7 +61,7 @@ public class Validator {
     }
 
 
-    public static Map<String, String> validdateIban(String iban){
+    public static Map<String, String> validateIban(String iban){
 
         Map<String, String> errors = new HashMap<>();
 

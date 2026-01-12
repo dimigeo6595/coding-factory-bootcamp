@@ -17,5 +17,8 @@ public class AddApp {
         System.out.println("Το αποτέλεσμα ειναι: " + result);
         System.out.println("Το αποτέλεσμα των: " + num1 + " και " + num2 + " είναι: "+ result);
         System.out.printf("Το άθροισμα των %,d, %,d είναι: %,d\n",num1, num2, result);
+
+
+
     }
 }

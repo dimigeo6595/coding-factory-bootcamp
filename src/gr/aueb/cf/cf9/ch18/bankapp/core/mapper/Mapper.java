@@ -12,7 +12,7 @@ public class Mapper {
 
     }
 
-    public static Account mapTopModelEntity(AccountInsertDTO dto){
+    public static Account mapToModelEntity(AccountInsertDTO dto){
         return new Account(dto.balance(), dto.iban());
     }
 
